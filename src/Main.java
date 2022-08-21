@@ -23,7 +23,6 @@ public class Main {
         array.add("seven");
         array.add("eight");
         array.remove(1);
-
     }
 
     public static class DynamicArray<T> {
