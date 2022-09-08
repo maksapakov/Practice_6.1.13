@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class Main {
@@ -89,7 +90,6 @@ public class Main {
 
     public static class DynamicArray<T> {
         private int size;
-        //        private int capacity = 1;
         private T[] array = (T[]) new Object[1];
 
         public void add(T el) {
@@ -100,17 +100,12 @@ public class Main {
         }
 
         public void remove(int index) {
-            final int newSize;
-            if ((newSize = size - 1) > index) {
-                System.arraycopy(array, index + 1, array, index, newSize - index);
-                array[size = newSize] = null;
-            } else {
-                array[size = newSize] = null;
-            }
+            System.arraycopy(array, index + 1, array, index, size - index - 1);
+            array[size = size - 1] = null;
         }
 
         public T get(int index) {
-            if (index > array.length || index < 0 || array[index] == null) {
+            if (index > array.length || index < 0) {
                 throw new ArrayIndexOutOfBoundsException();
             }
             return array[index];
